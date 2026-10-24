@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#E9DCC6">
 <meta property="og:title" content="dibs · Already yours.">
 <meta property="og:description" content="Your coffee, ready before you arrive. Order ahead, book your usual, call dibs.">
-<meta property="og:image" content="https://dibs-eg.vercel.app/og.jpg">
+<meta property="og:image" content="https://dibs-eg.vercel.app/og2.jpg">
 <meta property="og:url" content="https://dibs-eg.vercel.app/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -377,7 +377,7 @@ footer .credit b{color:var(--dark-ink)}
   </div>
   <div class="legal">
     <span>© <span id="yr">2026</span> dibs. All rights reserved.</span>
-    <span class="credit">Brand identity, smart menu and website designed by <b><a href="https://www.linkedin.com/in/kyrillos404/" rel="noopener" target="_blank">Kyrillos</a></b></span>
+    <span class="credit">Brand identity, smart menu and website designed by <b><a href="https://www.linkedin.com/in/kyrillos404/" rel="noopener" target="_blank">Kyrillos Nabil</a></b></span>
     <span>A portfolio concept. dibs is not a real café. Typeface: Dibs Sans, based on Outfit (SIL OFL). Photos: dibs, Unsplash. Hero film generated with AI.</span>
   </div>
 </div></footer>
@@ -453,7 +453,10 @@ function runIntro(done){
 /* ---------- idea 1: every i in display type flips into ! ---------- */
 function wrapI(el){
   const walk=(n)=>{ if(n.nodeType===3){ if(!/[iI]/.test(n.nodeValue)) return; const f=document.createDocumentFragment(); let k=0;
-      n.nodeValue.split(/([iI])/).forEach(part=>{ if(!part) return; if(/^[iI]$/.test(part)){const s=document.createElement("span");s.className="fi";s.textContent=part;s.style.setProperty("--d",(k++*70)+"ms");f.appendChild(s);} else f.appendChild(document.createTextNode(part)); });
+      n.nodeValue.split(/(\s+)/).forEach(word=>{ if(!word) return; if(!/[iI]/.test(word)){f.appendChild(document.createTextNode(word));return;}
+        const w=document.createElement("span"); w.style.whiteSpace="nowrap"; /* keep the word whole: inline-block ! must not break it */
+        word.split(/([iI])/).forEach(part=>{ if(!part) return; if(/^[iI]$/.test(part)){const s=document.createElement("span");s.className="fi";s.textContent=part;s.style.setProperty("--d",(k++*70)+"ms");w.appendChild(s);} else w.appendChild(document.createTextNode(part)); });
+        f.appendChild(w); });
       n.parentNode.replaceChild(f,n); }
     else if(n.nodeType===1&&!n.classList.contains("fi")) [...n.childNodes].forEach(walk); };
   walk(el);
